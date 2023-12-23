@@ -1,7 +1,7 @@
 import User from "../model/User.js";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
-
+import generateToken from "../utils/generate_token.js";
 
 // Register user
 // route POST /api/v1/users/register
@@ -46,7 +46,8 @@ export const loginUserController = expressAsyncHandler (async (req, res) => {
         res.json({
             msg: "login success",
             status: 'success',
-            userFound
+            userFound,
+            token: generateToken(userFound?._id)
         })
     } else {
         throw new Error("Invalid login credentials")
