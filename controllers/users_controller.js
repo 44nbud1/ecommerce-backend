@@ -2,6 +2,8 @@ import User from "../model/User.js";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
 import generateToken from "../utils/generate_token.js";
+import {getTokenFromHeader} from "../utils/getTokenFromHeader.js";
+import {verifyToken} from "../utils/verify_token.js";
 
 // Register user
 // route POST /api/v1/users/register
@@ -53,3 +55,13 @@ export const loginUserController = expressAsyncHandler (async (req, res) => {
         throw new Error("Invalid login credentials")
     }
 });
+
+export const getUserProfileController = expressAsyncHandler(async (req, res) => {
+    const token = getTokenFromHeader(req);
+    // verify Token
+    const verified = verifyToken(token);
+    console.log(verified)
+    res.json({
+        msg: 'Welcome to Profile page'
+    })
+})
