@@ -2,7 +2,7 @@ import User from "../model/User.js";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
 import generateToken from "../utils/generate_token.js";
-import {getTokenFromHeader} from "../utils/getTokenFromHeader.js";
+import {get_token_from_header} from "../utils/get_token_from_header.js";
 import {verifyToken} from "../utils/verify_token.js";
 
 // Register user
@@ -57,7 +57,7 @@ export const loginUserController = expressAsyncHandler (async (req, res) => {
 });
 
 export const getUserProfileController = expressAsyncHandler(async (req, res) => {
-    const token = getTokenFromHeader(req);
+    const token = get_token_from_header(req);
     // verify Token
     const verified = verifyToken(token);
     console.log(verified)
