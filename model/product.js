@@ -27,7 +27,7 @@ const ProductSchema = new Schema(
             required: true,
         },user: {
             type: mongoose.Schema.Types.ObjectId,
-            required: true,
+            required: false,
             ref: "User",
         },images: [
             {
@@ -64,6 +64,18 @@ const ProductSchema = new Schema(
     }
 );
 
-const Product = mongoose.model("Product", ProductSchema);
+// module.exports = mongoose.model("Product", ProductSchema);
+export default mongoose.model("Product", ProductSchema);
 
-export default Product;
+// const dataSchema = new mongoose.Schema({
+//     name: {
+//         required: true,
+//         type: String
+//     },
+//     age: {
+//         required: true,
+//         type: Number
+//     }
+// })
+//
+// module.exports = mongoose.model('Data', dataSchema)

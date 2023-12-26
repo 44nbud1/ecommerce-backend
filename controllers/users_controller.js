@@ -1,4 +1,4 @@
-import User from "../model/User.js";
+import User from "../model/user.js";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
 import generateToken from "../utils/generate_token.js";
@@ -9,7 +9,8 @@ import {verifyToken} from "../utils/verify_token.js";
 // route POST /api/v1/users/register
 // access private / admin
 
-export const registerUserController = expressAsyncHandler(async (req, res) => {
+export const registerUserController = async (req, res) => {
+
     const { fullName, email, password } = req.body;
 
     const userExist = await User.findOne({email})
@@ -34,9 +35,9 @@ export const registerUserController = expressAsyncHandler(async (req, res) => {
         data: user,
     })
 
-});
+};
 
-export const loginUserController = expressAsyncHandler (async (req, res) => {
+export const loginUserController = async (req, res) => {
     const {email,password} = req.body;
 
     // find user by email
@@ -54,9 +55,9 @@ export const loginUserController = expressAsyncHandler (async (req, res) => {
     } else {
         throw new Error("Invalid login credentials")
     }
-});
+};
 
-export const getUserProfileController = expressAsyncHandler(async (req, res) => {
+export const getUserProfileController = async (req, res) => {
     const token = get_token_from_header(req);
     // verify Token
     const verified = verifyToken(token);
@@ -64,4 +65,4 @@ export const getUserProfileController = expressAsyncHandler(async (req, res) => 
     res.json({
         msg: 'Welcome to Profile page'
     })
-})
+}

@@ -12,7 +12,7 @@ const apiV1Path = "/api/v1"
 dotenv.config()
 
 // connect to db
-dbConn()
+dbConn().then(r => console.log("connected mongoose"))
 
 // initialize express
 const app = express();
@@ -27,4 +27,5 @@ app.use(apiV1Path +'/product', productRoute)
 // err middleware
 app.use(notFoundHandler)
 app.use(globalErrorHandler)
+
 export default app;
